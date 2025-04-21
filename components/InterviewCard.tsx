@@ -7,7 +7,7 @@ import { getRandomInterviewCover } from '@/lib/utils';
 import DisplayTechIcons from './DisplayTechIcons';
 
 const InterviewCard = async ({
-    interviewId,
+    id,
     userId,
     role,
     type,
@@ -49,7 +49,7 @@ const InterviewCard = async ({
                 <DisplayTechIcons techStack={techstack} />
                 <Button className='btn-primary'>
                   <Link href={
-                    feedback ? `/interview/${interviewId}/feedback` : `/interview/${interviewId}`
+                    feedback ? `/interview/${id}/feedback` : `/interview/${id}`
                   }>
                     {feedback ? "View Feedback" : "Take Interview"}
                   </Link>
