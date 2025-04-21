@@ -76,8 +76,6 @@ export async function getFeedbackByInterviewId(
   params: GetFeedbackByInterviewIdParams
 ): Promise<Feedback | null> {
   const { interviewId, userId } = params;
-console.log("user", userId);
-  console.log("interview", interviewId);
   const querySnapshot = await db
     .collection("feedback")
     .where("interviewId", "==", interviewId)
@@ -113,7 +111,6 @@ export async function getLatestInterviews(
 export async function getInterviewsByUserId(
   userId: string
 ): Promise<Interview[] | null> {
-  console.log("user", userId);
   const interviews = await db
     .collection("interviews")
     .where("userId", "==", userId)
