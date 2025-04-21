@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import { getRandomInterviewCover } from '@/lib/utils';
 import DisplayTechIcons from './DisplayTechIcons';
+import { getFeedbackByInterviewId } from '@/lib/actions/general.action';
 
 const InterviewCard = async ({
     id,
@@ -14,7 +15,14 @@ const InterviewCard = async ({
     techstack,
     createdAt,
   }: InterviewCardProps) => {
-    const feedback = null as Feedback | null;
+      const feedback =
+    userId && id
+      ? await getFeedbackByInterviewId({
+          interviewId : id,
+          userId,
+        })
+      : null;
+      console.log("feedback", feedback);
     const normalizedType = /mix/gi.test(type) ? "Mixed" : type;
     const formattedDate = dayjs(feedback?.createdAt || createdAt || Date.now()).format("MMM D,YYYY");
   return (
@@ -43,7 +51,7 @@ const InterviewCard = async ({
                 </div>
              </div>
                 <p className='line-clamp-2 mt-5'>
-                  {feedback?.finalAssessment || "You haven&apos;t taken the interview yet. Take it now to improve your skills."}
+                  {feedback?.finalAssessment || "You haven't taken the interview yet. Take it now to improve your skills."}
                 </p>
              <div className='flex flex-row justify-between'>
                 <DisplayTechIcons techStack={techstack} />
